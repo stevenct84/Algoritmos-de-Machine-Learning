@@ -1,5 +1,4 @@
 # CART on the Bank Note dataset
-import enum
 from random import seed
 from random import randrange
 from csv import reader 
@@ -29,6 +28,25 @@ def strColumnToFloat(dataset, column):
 def limitDataset(dataset, size):
 	for i in range (size):
 		dataset.append(fullDataSet[i])
+
+# Set the size of the dataset
+def setSize(i):
+	if(i == 0):
+		return 10
+	elif(i == 1):
+		return 50
+	elif(i == 2):
+		return 100
+	elif(i == 3):
+		return 200
+	elif(i == 4):
+		return 500
+	elif(i == 5):
+		return 1000
+	elif(i == 6):
+		return 7000
+	else:
+		return 10000
 	
 
 #-----------------------------------------------------------------
@@ -46,6 +64,7 @@ def crossValidationSplit(dataset, n_folds):
 			index = randrange(len(dataset_copy))
 			fold.append(dataset_copy.pop(index))
 			lineas+=3
+			a+=2
 		dataset_split.append(fold)
 		lineas+=2
 	c+=1
@@ -88,7 +107,6 @@ def evaluateAlgorithm(dataset, algorithm, n_folds, *args):
 		for row in fold:
 			c+=1
 			a+=1
-
 			row_copy = list(row)
 			test_set.append(row_copy)
 			row_copy[-1] = None
@@ -293,27 +311,6 @@ def decisionTree(train, test, max_depth, min_size):
 	c+=1
 	return(predictions)
 
-def setSize(i):
-	if(i == 0):
-		return 10
-	elif(i == 1):
-		return 50
-	elif(i == 2):
-		return 100
-	elif(i == 3):
-		return 200
-	elif(i == 4):
-		return 500
-	elif(i == 5):
-		return 1000
-	elif(i == 6):
-		return 7000
-	else:
-		return 10000
-
-		
-
-	
 
 # Test CART on Bank Note dataset
 seed(1)
